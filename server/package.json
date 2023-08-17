@@ -1,0 +1,15 @@
+{
+  "name": "tagchat",
+  "version": "1.0.0",
+  "description": "General chat with tags",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "5.7",
+    "socket.io": "^4.7.2"
+  }
+}
