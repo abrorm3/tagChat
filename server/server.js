@@ -4,7 +4,12 @@ const http = require("http");
 
 // Create an HTTP server
 const server = http.createServer();
-const io = new Server(server);
+const io = new Server(server, {
+    cors: {
+        origin: 'http://localhost:4200',
+        methods: ['GET', 'POST']
+    }
+});
 
 // MongoDB connection URL
 const mongoDBURL = 'mongodb+srv://abrormukhammadiev:789654123Abror@tagchat-cluster.u3ihlha.mongodb.net/?retryWrites=true&w=majority';
@@ -27,6 +32,7 @@ async function connectToMongo() {
                     throw err;
                 }
                 socket.emit('output', res);
+                console.log('sent!')
             });
 
             // Handle input events
