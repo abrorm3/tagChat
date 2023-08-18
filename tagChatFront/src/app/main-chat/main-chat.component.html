@@ -15,7 +15,7 @@
             <input [(ngModel)]="username" type="text" placeholder="Here" class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </div>
 
-        <div class="h-60 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2">
+        <div #scrollMe class="h-60 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2">
           <div *ngFor="let message of messages">
               <strong>{{ message.name }}:</strong> {{ message.message }}
           </div>

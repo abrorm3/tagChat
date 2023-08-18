@@ -10,6 +10,12 @@ export class SocketService {
 
   connect() {
     this.socket.connect();
+    if(this.socket!==undefined){
+      this.socket.on('output',(data: any)=>{
+        console.log(data);
+
+      })
+    }
   }
 
   on(event: string, callback: (data: any) => void) {

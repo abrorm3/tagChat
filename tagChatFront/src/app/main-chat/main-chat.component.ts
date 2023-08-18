@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SocketService } from './socket.service';
 
 @Component({
@@ -12,14 +12,28 @@ export class MainChatComponent implements OnInit {
   public newMessage: string = '';
 
   constructor(private socketService: SocketService) {}
+  @ViewChild('scrollMe', { static: false }) private scrollContainer!: ElementRef;
+
 
   ngOnInit(): void {
     this.socketService.connect();
-    // This code is not being triggered
     this.socketService.on('output', (data: any[]) => {
-      this.messages = data;
+      this.messages = [...this.messages,data];
       console.log("Populating: "+this.messages);
     });
+    this.socketService.on('records', (data: any[]) => {
+      this.messages = data;
+    });
+  }
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+  private scrollToBottom(): void {
+    try {
+      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   sendMessage(): void {
