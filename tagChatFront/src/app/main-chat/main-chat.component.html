@@ -12,7 +12,7 @@
 
         <div class="mb-4">
             <label for="username" class="block text-sm font-medium text-gray-700">User Name</label>
-            <input [(ngModel)]="username" type="text" placeholder="Here" class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+            <input [(ngModel)]="username" type="text" placeholder="Here" maxlength="15" class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </div>
         <div class="mb-2 text-red-600" *ngIf="errorMessage">{{ errorMessage }}</div>
         <div #scrollMe class="h-60 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2 whitespace-pre-line">
@@ -24,7 +24,7 @@
 
       <div class="flex">
 
-        <input [(ngModel)]="newMessage" type="text" placeholder="Type a message..." class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+        <input [(ngModel)]="newMessage" maxlength="200" type="text" placeholder="Type a message..." class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         <button (click)="sendMessage()" class="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-indigo-200">
             Send
         </button>
