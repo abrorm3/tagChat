@@ -1,26 +1,25 @@
-import { Component } from '@angular/core';
-import { io } from 'socket.io-client';
+import { Component, OnInit } from '@angular/core';
+import { SocketService } from './socket.service';
 
 @Component({
   selector: 'app-main-chat',
   templateUrl: './main-chat.component.html',
   styleUrls: ['./main-chat.component.css']
 })
-export class MainChatComponent {
-  private socket: any;
+export class MainChatComponent implements OnInit {
   public messages: any[] = [];
   public username: string = '';
   public newMessage: string = '';
 
+  constructor(private socketService: SocketService) {}
+
   ngOnInit(): void {
     // Connect to the Socket.io server
-    this.socket = io('http://localhost:3000');
-
+    this.socketService.connect();
     // Listen for 'output' event to receive chat history
-    this.socket.on('output', (data: any[]) => {
+    this.socketService.on('output', (data: any[]) => {
       this.messages = data;
-      console.log(this.messages);
-
+      console.log("Populating: "+this.messages);
     });
   }
 
@@ -29,16 +28,14 @@ export class MainChatComponent {
       return;
     }
 
-    // Emit 'input' event to send a new message
-    this.socket.emit('input', {
+    this.socketService.emit('input', {
       name: this.username,
       message: this.newMessage
-
     });
-    console.log('sent front');
 
-    // Clear the new message input
     this.newMessage = '';
+    console.log('Message sent!');
+
 
   }
 }

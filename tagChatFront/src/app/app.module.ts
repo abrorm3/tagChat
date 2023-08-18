@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { MainChatComponent } from './main-chat/main-chat.component';
 import { TagPanelComponent } from './main-chat/tag-panel/tag-panel.component';
 import { AppRoutingModule } from './app-routing.module';
-import { SocketIoConfig } from 'ngx-socket-io';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { environment } from './environment';
 
 const config: SocketIoConfig = {
@@ -17,7 +17,7 @@ const config: SocketIoConfig = {
 }
 @NgModule({
   declarations: [AppComponent, MainChatComponent, TagPanelComponent],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule,SocketIoModule.forRoot(config)],
   providers: [],
   bootstrap: [AppComponent],
 })
