@@ -1,0 +1,5 @@
+.wrapBreak{
+  display:block;
+    width:320px;
+    word-wrap:break-word;
+}

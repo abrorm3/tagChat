@@ -6,10 +6,10 @@ dotenv.config();
 
 const server = http.createServer();
 const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:4200",
-    methods: ["GET", "POST"],
-  },
+//   cors: {
+//     origin: "http://localhost:4200",
+//     methods: ["GET", "POST"],
+//   },
 });
 
 // MongoDB connection URL
