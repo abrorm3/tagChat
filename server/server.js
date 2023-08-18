@@ -1,6 +1,8 @@
 const mongo = require("mongodb").MongoClient;
 const { Server } = require("socket.io");
 const http = require("http");
+const dotenv = require('dotenv');
+dotenv.config();
 
 const server = http.createServer();
 const io = new Server(server, {
@@ -11,8 +13,8 @@ const io = new Server(server, {
 });
 
 // MongoDB connection URL
-const mongoDBURL =
-  "mongodb+srv://abrormukhammadiev:789654123Abror@tagchat-cluster.u3ihlha.mongodb.net/?retryWrites=true&w=majority";
+const mongoDBURL = process.env.mongoDBURL;
+  
 
 async function connectToMongo() {
   try {
@@ -25,12 +27,12 @@ async function connectToMongo() {
 
     io.on("connection", async (socket) => {
       console.log("A user connected");
-      socket.emit("welcome", "Welcome to the chat!");
       const chatCollection = client.db().collection("chats");
 
-      const chatDocuments = await chatCollection.find({}).toArray();
+      const chatDocuments = await chatCollection.find({}).sort({_id: -1}).limit(60).toArray();
+      const messagesInDesiredOrder = chatDocuments.reverse();
 
-      socket.emit("records", chatDocuments);
+      socket.emit("records", messagesInDesiredOrder);
 
       socket.on("input", (data) => {
         let name = data.name;

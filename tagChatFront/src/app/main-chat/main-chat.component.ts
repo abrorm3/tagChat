@@ -19,7 +19,6 @@ export class MainChatComponent implements OnInit {
     this.socketService.connect();
     this.socketService.on('output', (data: any[]) => {
       this.messages = [...this.messages,data];
-      console.log("Populating: "+this.messages);
     });
     this.socketService.on('records', (data: any[]) => {
       this.messages = data;

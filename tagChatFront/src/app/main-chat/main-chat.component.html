@@ -16,7 +16,7 @@
         </div>
 
         <div #scrollMe class="h-60 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2">
-          <div *ngFor="let message of messages">
+          <div *ngFor="let message of messages" class="whitespace-normal">
               <strong>{{ message.name }}:</strong> {{ message.message }}
           </div>
       </div>
