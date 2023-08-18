@@ -14,9 +14,8 @@ export class MainChatComponent implements OnInit {
   constructor(private socketService: SocketService) {}
 
   ngOnInit(): void {
-    // Connect to the Socket.io server
     this.socketService.connect();
-    // Listen for 'output' event to receive chat history
+    // This code is not being triggered
     this.socketService.on('output', (data: any[]) => {
       this.messages = data;
       console.log("Populating: "+this.messages);
