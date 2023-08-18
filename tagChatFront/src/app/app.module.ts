@@ -8,6 +8,7 @@ import { TagPanelComponent } from './main-chat/tag-panel/tag-panel.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { environment } from './environment';
+import { LoadingSpinnerComponent } from './loadingSpinner/loading-spinner.component';
 
 const config: SocketIoConfig = {
 	url: environment.socketUrl, // socket server url;
@@ -16,7 +17,7 @@ const config: SocketIoConfig = {
 	}
 }
 @NgModule({
-  declarations: [AppComponent, MainChatComponent, TagPanelComponent],
+  declarations: [AppComponent, MainChatComponent, TagPanelComponent,LoadingSpinnerComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule,SocketIoModule.forRoot(config)],
   providers: [],
   bootstrap: [AppComponent],

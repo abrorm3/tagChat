@@ -11,18 +11,21 @@ export class MainChatComponent implements OnInit {
   public username: string = '';
   public newMessage: string = '';
   public errorMessage: string = '';
+  isLoading = false;
 
   constructor(private socketService: SocketService) {}
   @ViewChild('scrollMe', { static: false })
   private scrollContainer!: ElementRef;
 
   ngOnInit(): void {
+    this.isLoading=true;
     this.socketService.connect();
     this.socketService.on('output', (data: any[]) => {
       this.messages = [...this.messages, data];
     });
     this.socketService.on('records', (data: any[]) => {
       this.messages = data;
+      this.isLoading=false;
     });
 
   }
@@ -47,13 +50,14 @@ export class MainChatComponent implements OnInit {
       this.errorMessage = 'Please enter a message.';
       return;
     }
-
+    this.isLoading=true;
     this.socketService.emit('input', {
       name: this.username,
       message: this.newMessage,
     });
 
     this.newMessage = '';
+    this.isLoading=false;
     console.log('Message sent!');
   }
 }
