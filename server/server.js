@@ -46,7 +46,7 @@ async function connectToMongo() {
               throw err;
             }
           });
-          socket.emit("output", data);
+          io.emit("output", data);
           socket.emit("status", {
             message: "Message sent",
             clear: true,
