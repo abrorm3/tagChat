@@ -7,7 +7,6 @@
 
     <!-- Add the tag panel component here -->
 
-
     <div class="mb-4">
       <label for="username" class="block text-sm font-medium text-gray-700">User Name</label>
       <input
@@ -29,8 +28,14 @@
       <div *ngFor="let message of messages" class="wrapBreak" [ngClass]="{'hidden': !messageHasMatchingTags(message)}">
         <strong>{{ message.name }}:</strong>
         {{ message.message }}
-        <span *ngIf="message.tags && message.tags.length > 0" class="ml-2 text-gray-600">
-          Tags: {{ message.tags.join(', ') }}
+        <span *ngIf="message.tags && message.tags.length > 0" class="mt-1 text-gray-600">
+          Tags:
+          <span
+            *ngFor="let tag of message.tags"
+            class="inline-block bg-gray-200 text-sm text-gray-700 px-2 py-1 rounded-full mr-1 mb-1"
+          >
+            {{ tag }}
+          </span>
         </span>
       </div>
     </div>
