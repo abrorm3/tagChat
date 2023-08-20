@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TagPanelService } from './tag-panel.service';
 import { SharedTagService } from '../shared/shared-tag.service';
+import { SocketService } from '../main-chat/socket.service';
 
 @Component({
   selector: 'app-tag-panel',
@@ -11,10 +11,26 @@ export class TagPanelComponent implements OnInit {
   availableTags: any[] = [];
   selectedTags: any[] = [];
 
-  constructor(private tagService: TagPanelService, private sharedTagService: SharedTagService) {}
+  constructor(private sharedTagService: SharedTagService, private socketService:SocketService) {}
 
   ngOnInit(): void {
-    this.availableTags = this.tagService.getAvailableTags();
+    this.fetchTags();
+  }
+  fetchTags(){
+    this.socketService.on('records', (data: any[]) => {
+      this.availableTags = this.extractTagsFromMessages(data);
+    });
+  }
+  private extractTagsFromMessages(messages: any[]): string[] {
+    const tagsSet = new Set<string>();
+    messages.forEach((message) => {
+      if (message.tags && message.tags.length > 0) {
+        message.tags.forEach((tag: string) => {
+          tagsSet.add(tag);
+        });
+      }
+    });
+    return Array.from(tagsSet);
   }
 
   addTag(tagName: string) {
@@ -22,6 +38,7 @@ export class TagPanelComponent implements OnInit {
       this.selectedTags.push(tagName);
       this.sharedTagService.setSelectedTags(this.selectedTags);
     }
+
   }
 
   addTagFromInput() {
@@ -30,7 +47,9 @@ export class TagPanelComponent implements OnInit {
       this.selectedTags.push(tagName);
       (document.getElementById('tag-input') as HTMLInputElement).value = '';
       this.sharedTagService.setSelectedTags(this.selectedTags);
+      this.fetchTags();
     }
+
   }
 
   removeTag(index: number) {
