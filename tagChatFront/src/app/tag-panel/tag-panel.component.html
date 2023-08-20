@@ -1,0 +1,48 @@
+<!-- tag-panel.component.html -->
+
+<div class="tags-panel bg-gray-200 p-4">
+  <h2 class="text-lg font-semibold mb-2">Available tags:</h2>
+
+  <!-- Display available tags with scroll -->
+  <div class="available-tags-scroll h-32 overflow-y-auto flex flex-wrap mb-2">
+    <div
+      *ngFor="let tag of availableTags"
+      class="available-tag bg-gray-300 p-2 m-1 rounded"
+      (click)="addTag(tag)"
+    >
+      <span class="mr-2">{{ tag }}</span>
+      <button
+        class="text-gray-600 hover:text-red-600 focus:outline-none"
+        (click)="addTag(tag)"
+      >
+        +
+      </button>
+    </div>
+  </div>
+
+  <!-- Selected tags -->
+  <div class="mb-2">
+    <input
+      type="text"
+      id="tag-input"
+      placeholder="Add tags"
+      class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
+      (keydown.enter)="addTagFromInput()"
+    />
+  </div>
+  <div class="flex flex-wrap">
+    <div
+      *ngFor="let tag of selectedTags; let i = index"
+      class="selected-tag bg-gray-300 p-2 m-1 rounded flex items-center"
+      (click)="toggleTag(i)"
+    >
+      <span class="mr-2">{{ tag }}</span>
+      <button
+        class="text-gray-600 hover:text-red-600 focus:outline-none"
+        (click)="removeTag(i)"
+      >
+        &times;
+      </button>
+    </div>
+  </div>
+</div>

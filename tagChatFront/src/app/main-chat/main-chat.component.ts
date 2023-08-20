@@ -11,6 +11,7 @@ export class MainChatComponent implements OnInit {
   public username: string = '';
   public newMessage: string = '';
   public errorMessage: string = '';
+  selectedTags: string[] = [];
   isLoading = false;
 
   constructor(private socketService: SocketService) {}
@@ -60,4 +61,13 @@ export class MainChatComponent implements OnInit {
     this.isLoading=false;
     console.log('Message sent!');
   }
+  messageHasMatchingTags(message: any): boolean {
+    if (!message.tags || message.tags.length === 0) {
+      return true; // Show messages without tags
+    }
+
+    // Check if any of the message's tags match the user's selected tags
+    return message.tags.some((tag: string) => this.selectedTags.includes(tag));
+  }
+
 }
