@@ -34,23 +34,45 @@ async function connectToMongo() {
 
       socket.emit("records", messagesInDesiredOrder);
 
-      socket.on("input", (data) => {
+      socket.on("input", async (data) => {
         let name = data.name;
         let message = data.message;
-
+        let tags = data.tags || [];
+      
         if (name === "" || message === "") {
           socket.emit("status", "Please enter a name and message");
         } else {
-          chatCollection.insertOne({ name: name, message: message }, (err) => {
+          const chatDocument = {
+            name: name,
+            message: message,
+            tags: tags,
+          };
+      
+          chatCollection.insertOne(chatDocument, (err) => {
             if (err) {
               throw err;
             }
           });
-          io.emit("output", data);
+      
+          io.emit("output", chatDocument);
           socket.emit("status", {
             message: "Message sent",
             clear: true,
           });
+      
+          // Emit the filtered messages to the client
+          const filteredMessages = messagesInDesiredOrder.filter((message) => {
+            if (tags.length === 0) {
+              return true; // Show all messages if no tags are selected
+            }
+      
+            // Check if message tags are defined and contain at least one of the selected tags
+            return (
+              message.tags &&
+              message.tags.some((tag) => tags.includes(tag))
+            );
+          });
+          socket.emit("filteredMessages", filteredMessages);
         }
       });
 

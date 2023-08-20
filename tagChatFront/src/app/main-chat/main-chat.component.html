@@ -29,6 +29,9 @@
       <div *ngFor="let message of messages" class="wrapBreak" [ngClass]="{'hidden': !messageHasMatchingTags(message)}">
         <strong>{{ message.name }}:</strong>
         {{ message.message }}
+        <span *ngIf="message.tags && message.tags.length > 0" class="ml-2 text-gray-600">
+          Tags: {{ message.tags.join(', ') }}
+        </span>
       </div>
     </div>
 

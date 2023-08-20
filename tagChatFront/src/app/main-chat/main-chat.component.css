@@ -3,3 +3,6 @@
     width:315px;
     word-wrap:break-word;
 }
+.hidden{
+  display: none;
+}

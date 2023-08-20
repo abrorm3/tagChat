@@ -4,11 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class TagPanelService {
-
+  chosenTags: string[] = [];
   constructor() { }
 
   getAvailableTags(): string[] {
     // Return some example available tags
-    return ['TagA', 'TagB', 'TagC','Testing','Game','World of Warcraft'];
+    return ['TagA', 'TagB', 'TagC','Testing','Game','World of Warcraft','diko'];
+  }
+  sendTag(tag: string){
+    this.chosenTags.push(tag);
   }
 }
