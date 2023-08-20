@@ -127,8 +127,8 @@ export class MainChatComponent implements OnInit {
   }
   messageHasMatchingTags(message: any): boolean {
     if (!this.selectedTags || this.selectedTags.length === 0) {
-      // If no tags are selected, show the message
-      return true;
+      // If no tags are selected, show the message only if it has no tags
+      return !message.tags || message.tags.length === 0;
     }
 
     if (!message.tags || message.tags.length === 0) {
@@ -139,6 +139,7 @@ export class MainChatComponent implements OnInit {
     // Check if the message tags have at least one tag in common with selected tags
     return message.tags.some((tag: string) => this.selectedTags.includes(tag));
   }
+
 
 
 }
