@@ -29,7 +29,7 @@ async function connectToMongo() {
       console.log("A user connected");
       const chatCollection = client.db().collection("chats");
 
-      const chatDocuments = await chatCollection.find({}).sort({_id: -1}).limit(60).toArray();
+      const chatDocuments = await chatCollection.find({}).sort({_id: -1}).limit(120).toArray();
       const messagesInDesiredOrder = chatDocuments.reverse();
 
       socket.emit("records", messagesInDesiredOrder);

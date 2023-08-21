@@ -1,8 +1,11 @@
 .wrapBreak{
   display:block;
-    width:315px;
+    width:100%;
     word-wrap:break-word;
 }
 .hidden{
   display: none;
+}
+.tagSize{
+  font-size: 0.6rem;
 }

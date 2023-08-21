@@ -1,27 +1,13 @@
-<div
-  class="credentials font-lato flex justify-end pr-10 font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-950"
->
-  <a
-    class="mr-2 text-indigo-200"
-    href="https://github.com/abrorm3/FakeUserDataGenerator"
-    target="_blank"
-    >GitHub</a
-  >
-  <a
-    class="text-blue-500"
-    href="https://www.linkedin.com/in/abror-mukhammadiev-a74b9a205/"
-    target="_blank"
-    >LinkedIn</a
-  >
+<div class="credentials font-lato flex justify-end pr-10 font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-950">
+  <a class="mr-2 text-indigo-200" href="https://github.com/abrorm3/FakeUserDataGenerator" target="_blank">GitHub</a>
+  <a class="text-blue-500" href="https://www.linkedin.com/in/abror-mukhammadiev-a74b9a205/" target="_blank">LinkedIn</a>
 </div>
 
 <body class="bg-gray-100 h-screen flex justify-center items-center">
-  <div class="tagPanel flex flex-col justify-end mr-2">
+  <div class="tagPanel flex flex-col justify-end mr-4">
     <app-tag-panel></app-tag-panel>
   </div>
-  <div
-    class="bg-white rounded-lg shadow-md p-6 w-full sm:w-96 md:w-160 lg:w-240 xl:w-320"
-  >
+  <div class="bg-white rounded-lg shadow-md p-6 w-full sm:w-3/5 md:w-160 lg:w-240 xl:w-640 h-5/6">
     <h1 class="text-2xl font-semibold mb-4">Tag Chat</h1>
     <div *ngIf="errorMessage !== ''" class="bg-red-100 text-red-600 px-2 py-1 rounded text-sm mb-2">{{ errorMessage }}</div>
     <div class="mb-4">
@@ -36,7 +22,7 @@
 
     <div
       #scrollMe
-      class="h-60 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2 whitespace-pre-line"
+      class="h-3/4 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2 whitespace-pre-line"
     >
       <div
         class="loadingSpinner flex justify-center items-center"
@@ -55,10 +41,9 @@
           *ngIf="message.tags && message.tags.length > 0"
           class="mt-1 text-gray-600"
         >
-          Tags:
           <span
             *ngFor="let tag of message.tags"
-            class="inline-block bg-gray-200 text-sm text-gray-700 px-2 py-1 rounded-full mr-1 mb-1"
+            class="inline-flex items-center justify-center bg-gray-200 tagSize text-gray-700 px-2 py-1 rounded-full mr-1 mb-1"
           >
             {{ tag }}
           </span>
