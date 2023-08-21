@@ -1,25 +1,36 @@
-<div class="credentials font-lato flex justify-end pr-10 font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-950">
-  <a class="mr-2 text-indigo-200" href="https://github.com/abrorm3/FakeUserDataGenerator" target="_blank">GitHub</a>
-  <a class="text-blue-500" href="https://www.linkedin.com/in/abror-mukhammadiev-a74b9a205/" target="_blank">LinkedIn</a>
+<div
+  class="credentials font-lato flex justify-end pr-10 font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-blue-950"
+>
+  <a
+    class="mr-2 text-indigo-200"
+    href="https://github.com/abrorm3/FakeUserDataGenerator"
+    target="_blank"
+    >GitHub</a
+  >
+  <a
+    class="text-blue-500"
+    href="https://www.linkedin.com/in/abror-mukhammadiev-a74b9a205/"
+    target="_blank"
+    >LinkedIn</a
+  >
 </div>
 
 <body class="bg-gray-100 h-screen flex justify-center items-center">
   <div class="tagPanel flex flex-col justify-end mr-2">
     <app-tag-panel></app-tag-panel>
   </div>
-  <div class="bg-white rounded-lg shadow-md p-6 w-full sm:w-96 md:w-160 lg:w-240 xl:w-320">
+  <div
+    class="bg-white rounded-lg shadow-md p-6 w-full sm:w-96 md:w-160 lg:w-240 xl:w-320"
+  >
     <h1 class="text-2xl font-semibold mb-4">Tag Chat</h1>
-
-    <!-- Add the tag panel component here -->
-
+    <div *ngIf="errorMessage !== ''" class="bg-red-100 text-red-600 px-2 py-1 rounded text-sm mb-2">{{ errorMessage }}</div>
     <div class="mb-4">
-      <label for="username" class="block text-sm font-medium text-gray-700">User Name</label>
       <input
         [(ngModel)]="username"
         type="text"
-        placeholder="Here"
+        placeholder="Set username..."
         maxlength="15"
-        class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md pl-1"
       />
     </div>
 
@@ -27,13 +38,23 @@
       #scrollMe
       class="h-60 overflow-y-auto border border-gray-300 rounded-md mb-4 p-2 whitespace-pre-line"
     >
-      <div class="loadingSpinner flex justify-center items-center" *ngIf="isLoading">
+      <div
+        class="loadingSpinner flex justify-center items-center"
+        *ngIf="isLoading"
+      >
         <app-loading-spinner></app-loading-spinner>
       </div>
-      <div *ngFor="let message of messages" class="wrapBreak" [ngClass]="{'hidden': !messageHasMatchingTags(message)}">
+      <div
+        *ngFor="let message of messages"
+        class="wrapBreak"
+        [ngClass]="{ hidden: !messageHasMatchingTags(message) }"
+      >
         <strong>{{ message.name }}:</strong>
         {{ message.message }}
-        <span *ngIf="message.tags && message.tags.length > 0" class="mt-1 text-gray-600">
+        <span
+          *ngIf="message.tags && message.tags.length > 0"
+          class="mt-1 text-gray-600"
+        >
           Tags:
           <span
             *ngFor="let tag of message.tags"
@@ -51,7 +72,7 @@
         maxlength="200"
         type="text"
         placeholder="Type a message..."
-        class="flex-1 mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+        class="flex-1 mt-1 pl-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
       />
       <button
         (click)="sendMessage()"
